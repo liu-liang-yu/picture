@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"> <head>
+  <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>圖片展示系統</title> <style>
+  body {
+    font-family: Arial, sans-serif; /* 設定網頁預設字體 */
+    padding: 20px; /* 設定body內邊距 */
+    text-align: center; /* 設定body內文字置中 */
+  }
+  .buttons {
+    margin-bottom: 20px; /* 設定按鈕容器下邊距 */
+  }
+  button {
+    padding: 10px 20px; /* 設定按鈕內邊距 */
+    margin: 5px; /* 設定按鈕外邊距 */
+    font-size: 16px; /* 設定按鈕文字大小 */
+    cursor: pointer; /* 設定滑鼠移到按鈕上的樣式為手型 */
+  }
+  .gallery {
+    display: flex; /* 使用彈性佈局 */
+    flex-wrap: wrap; /* 當空間不足時自動換行 */
+    justify-content: center; /* 圖片在水平方向置中對齊 */
+    gap: 15px; /* 設定圖片之間的間距 */
+  }
+  .gallery img {
+    width: 300px; /* 設定圖片寬度 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* 設定圖片陰影效果 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 設定圖片變形和陰影的過渡效果 */
+  }
+  .gallery img:hover {
+    transform: scale(1.05); /* 滑鼠移到圖片上時放大1.05倍 */
+    box-shadow: none; /* 滑鼠移到圖片上時移除陰影 */
+  }
+  @media (max-width: 600px) { /* 媒體查詢，當螢幕寬度小於等於600px時應用以下樣式 */
+    .gallery {
+      flex-direction: column; /* 改為垂直方向排列 */
+    }
+    .gallery img {
+      width: 90%; /* 圖片寬度調整為容器的90% */
+    }
+  }
+</style>
+</head>
+<body>
+<h1>圖片展示系統</h1> <div class="buttons"> <button onclick="showCategory('all')">全部圖片</button> <button onclick="showCategory('nature')">自然風景圖</button> <button onclick="showCategory('city')">城市風景圖</button> </div>
+<div class="gallery" id="gallery"></div> <script>
+  const images = { // 定義一個物件，用於儲存不同類別的圖片路徑
+    all: [ // "全部圖片"類別的圖片路徑陣列
+      "nature1.jpg", "nature2.jpg", "nature3.jpg", "nature4.jpg", "nature5.jpg",
+      "city1.jpg", "city2.jpg", "city3.jpg"
+    ],
+    nature: [ // "自然風景圖"類別的圖片路徑陣列
+      "nature1.jpg", "nature2.jpg", "nature3.jpg", "nature4.jpg", "nature5.jpg"
+    ],
+    city: [ // "城市風景圖"類別的圖片路徑陣列
+      "city1.jpg", "city2.jpg", "city3.jpg"
+    ]
+  };
+
+  function showCategory(category) { // 定義一個函式，用於根據選擇的類別顯示圖片
+    const gallery = document.getElementById("gallery"); // 取得id為"gallery"的DOM元素
+    gallery.innerHTML = images[category].map(img => `<img src="${img}" />`).join(''); // 根據選擇的類別，將對應的圖片路徑陣列轉換為<img>標籤字串並更新gallery的innerHTML
+  }
+
+  showCategory('all'); // 網頁載入時預設顯示所有圖片
+</script>
+</body>
+</html>
